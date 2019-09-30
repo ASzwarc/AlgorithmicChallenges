@@ -21,6 +21,9 @@ def solver(input_list: List[str]) -> List[str]:
             self._elem = elem
             self._count = 1
 
+        def __str__(self):
+            return f"{self._elem}:{self._count}"
+
     element_list: List[Element] = []
 
     # Algorithm:
@@ -31,7 +34,16 @@ def solver(input_list: List[str]) -> List[str]:
     # equal or bigger than 3 then delete elements.
 
     for elem in input_list:
-        pass
+        if (len(element_list) > 0 and element_list[-1]._elem == elem):
+            element_list[-1]._count += 1
+        else:
+            if (len(element_list) > 0 and element_list[-1]._count >= 3):
+                # delete elements
+                pass
+            else:
+                element_list.append(Element(elem))
+
+    print(element_list)
 
     return [element._elem for element in element_list]
 
