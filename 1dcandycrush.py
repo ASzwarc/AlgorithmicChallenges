@@ -46,6 +46,11 @@ def solver(input_list: List[str]) -> List[str]:
             else:
                 element_list.append(Element(elem))
 
+    # this check is needed in order to remove last element in case there is no
+    # different element in the end.
+    if len(element_list) > 0 and element_list[-1]._count >= 3:
+        element_list.pop()
+
     return [str(element) for element in element_list]
 
 
@@ -62,6 +67,10 @@ class Test1DCandyCrushSolver(unittest.TestCase):
     def test_third_case(self):
         self.assertListEqual(solver(
             ["A", "B", "B", "C", "C", "C", "B", "B", "D"]), ["A", "D"])
+
+    def test_fourth_case(self):
+        self.assertListEqual(solver(
+            ["A", "B", "B", "C", "C", "C", "B", "B"]), ["A"])
 
 
 if __name__ == "__main__":
